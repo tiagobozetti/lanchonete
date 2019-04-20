@@ -19,8 +19,8 @@ Projeto para controle de vendas de lanches.
 
 * Rodando o projeto no profile de test o banco de dados h2 será utilizado. Serão gerados cadastros de lanches, ingredientes, promoções e pedidos.
 * No profile de dev e produção o banco de dados PostgreSQL será utilizado. Não haverá pré-cadastro nestes profiles.
-* Para iniciar a utilização das apis será necessário primeiramente criar usuário através da URL http://<ip>:<porta>/usuarios, usar HTTP Verb POST. O body deverá conter o seguinte Json: {"usuario" : "string","senha" : "string"}.
-* O token de autenticação será retornado no header da chamada do http:<ip>:<porta>/login, o HTTP Verb e Json do body são os mesmo do método de cadastro de usuário.
+* Para iniciar a utilização das apis será necessário primeiramente criar usuário através da URL http://localhost:8080/usuarios, usar HTTP Verb POST. O body deverá conter o seguinte Json: {"usuario" : "string","senha" : "string"}.
+* O token de autenticação será retornado no header da chamada do http:localhost:8080/login, o HTTP Verb e Json do body são os mesmo do método de cadastro de usuário.
 * O token deverá ser passado no header das chamadas.
 * Documentação da API está disponível em http://<ip>:<porta>/swagger-ui.html
 * Para utilizar as chamadas direto no swagger desabilitar a autenticação(comentar a linha 62 e descomentar a 61 do com.finch.burguer.config.SecurityConfig). Necessário implementar a autenticação no swagger.
