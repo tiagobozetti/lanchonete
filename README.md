@@ -22,7 +22,7 @@ Projeto para controle de vendas de lanches.
 * Para iniciar a utilização das apis será necessário primeiramente criar usuário através da URL http://localhost:8080/usuarios, usar HTTP Verb POST. O body deverá conter o seguinte Json: {"usuario" : "string","senha" : "string"}.
 * O token de autenticação será retornado no header da chamada do http:localhost:8080/login, o HTTP Verb e Json do body são os mesmo do método de cadastro de usuário.
 * O token deverá ser passado no header das chamadas.
-* Documentação da API está disponível em http://<ip>:<porta>/swagger-ui.html
+* Documentação da API está disponível em http://localhost:8080/swagger-ui.html
 * Para utilizar as chamadas direto no swagger desabilitar a autenticação(comentar a linha 62 e descomentar a 61 do com.finch.burguer.config.SecurityConfig). Necessário implementar a autenticação no swagger.
 
 ## URL´s dos dados do profile test
