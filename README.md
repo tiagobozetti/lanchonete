@@ -24,6 +24,7 @@ Projeto para controle de vendas de lanches.
 * O token deverá ser passado no header das chamadas.
 * Documentação da API está disponível em http://localhost:8080/swagger-ui.html
 * Para utilizar as chamadas direto no swagger desabilitar a autenticação(comentar a linha 62 e descomentar a 61 do com.finch.burguer.config.SecurityConfig). Necessário implementar a autenticação no swagger.
+* Para abrir o projeto no Spring Tool Suite será necessário importar o projeto maven existente. File/Import/Maven/Existing Maven Projetcs. 
 
 ## URL´s dos dados do profile test
 
