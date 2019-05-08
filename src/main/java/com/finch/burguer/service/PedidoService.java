@@ -2,6 +2,8 @@ package com.finch.burguer.service;
 
 import java.math.BigDecimal;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,11 +12,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.finch.burguer.models.Lanche;
-import com.finch.burguer.models.LancheIngrediente;
 import com.finch.burguer.models.Pedido;
 import com.finch.burguer.models.PedidoItem;
-import com.finch.burguer.models.PedidoItemIngrediente;
 import com.finch.burguer.repositories.PedidoRepository;
 import com.finch.burguer.services.exceptions.RegraNegocioException;
 
@@ -24,9 +23,9 @@ public class PedidoService extends AbstractService<Pedido,Long>{
 	@Autowired
 	private PedidoRepository pedidoRepository;
 	@Autowired
-	private LancheService lancheService;
-	@Autowired
 	private PromocaoService promocaoService;
+	@Autowired
+	private EntityManager entityManager;
 	
 	@Override
     protected JpaRepository<Pedido, Long> getRepository() {
@@ -41,20 +40,11 @@ public class PedidoService extends AbstractService<Pedido,Long>{
 			throw new RegraNegocioException("Pedido não possui itens.");
 		}
 		
-		/*Adicionar ingredientes padrões do lanche*/
-		for(PedidoItem item: pedido.getItens()) {
-			Lanche lanche = lancheService.find(item.getLanche().getCodigoLanche());
-			for (LancheIngrediente lancheIngrediente: lanche.getLancheIngredientes()) {
-				item.getIngredientes().add(new PedidoItemIngrediente(item, lancheIngrediente.getIngrediente(), lancheIngrediente.getQuantidade()));
-			}
-		}
+		pedido = pedidoRepository.saveAndFlush(pedido);	
+		entityManager.refresh(pedido);
+		calcularValores(pedido);		
 		
-		pedidoRepository.save(pedido);
-				
-		calcularValores(pedido);
-		pedidoRepository.save(pedido);
-		
-		return pedido;
+		return pedidoRepository.save(pedido);
 	}
 	
 	public void calcularValores(Pedido pedido) {
